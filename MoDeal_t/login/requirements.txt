@@ -1,6 +1,8 @@
 lxml
 bottlenose
 python-dateutil
-pip install requests
-pip install wapy
+requests
+wapy
 ebaysdk
+gunicorn
+django-heroku
