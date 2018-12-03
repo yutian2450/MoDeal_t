@@ -13,7 +13,8 @@ import urllib
 import json
 import time
 from wapy.api import Wapy
-import wordpress_api
+import importlib
+#import wordpress_api
 from lxml import html
 
 # Create your views here.
@@ -74,11 +75,13 @@ def EtsyAPI(search_content, items_list):
     url = "https://openapi.etsy.com/v2/listings/active.js?keywords=" +search_content + "&limit=12&includes=Images:1&api_key=" + api_key
 
     ###crawl to get info
-    reload(sys)
-    sys.setdefaultencoding('utf8')
+    #reload(sys)
+    #sys.setdefaultencoding('utf8')
+    importlib.reload(sys)
 
     r = requests.get(url)
-    page_source = r.content
+    #page_source = r.content.encode(encoding='UTF-8',errors='strict')
+    page_source = r.text
     print(page_source)
     #d = json.loads(page_source[4:])
     #print(d['price'])
@@ -157,8 +160,9 @@ def EbayAPI(search_content, items_list):
 
 
 def AmazonCrawl(search_content, items_list):
-    reload(sys)
-    sys.setdefaultencoding('utf8')
+    #reload(sys)
+    importlib.reload(sys)
+    #sys.setdefaultencoding('utf8')
     url = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=" + search_content
     #url = "https://www.amazon.com/s/keywords=" + search_content
 
@@ -186,7 +190,7 @@ def AmazonCrawl(search_content, items_list):
             items_list.append(temp)
         num+=1
     '''
-    page_source = r.content
+    page_source = r.text
     start = 0
     end = 0
     end_name=0
@@ -211,12 +215,13 @@ def AmazonCrawl(search_content, items_list):
         # print(start_name, end_name, temp_name_str)
 
 def BestBuyCrawl(search_content, items_list):
-    reload(sys)
-    sys.setdefaultencoding('utf8')
+    #reload(sys)
+    importlib.reload(sys)
+    #sys.setdefaultencoding('utf8')
 
     url = "https://www.bestbuy.com/site/searchpage.jsp?st="+search_content+"&_dyncharset=UTF-8&id=pcat17071&type=page&sc=Global&cp=1&nrp=&sp=&qp=&list=n&af=true&iht=y&usc=All+Categories&ks=960&keys=keys"
     r = requests.get(url)
-    page_source = r.content
+    page_source = r.text
     start = 0
     end = 0
     end_name = 0
