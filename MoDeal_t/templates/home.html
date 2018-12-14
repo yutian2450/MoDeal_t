@@ -50,15 +50,24 @@
 <body>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+{% if user.is_authenticated %}
 <p>
 <div class="div-right">
-  <a href="file:///C:/Users/Ziqi/Desktop/Sign in.html" target="_blank" align="right">Sign up or log in</a>
+    <p>Hi <a href="{% url 'user_home' %}">{{ user.username }}</a>!!</p>
+  <a href="{% url 'account_logout' %}" target="_self" align="right">Log out</a>
 </div>
 </p>
+{% else %}
+<p>
+<div class="div-right">
+  <a type="button" class="btn btn-large"  href="{% url 'account_login' %}" target="_self" align="right">Log in</a>
+  <a type="button" class="btn btn-dark btn-large"  href="{% url 'account_signup' %}" target="_self" align="right">Sign up</a>
+</div>
+</p>
+{% endif %}
 
 <div class="div-picture">
 <p Style = "Color:teal;font-size:75px" align = "center"><img src="/static/img/moyu.jpg" width="115px" height="115px"/>MoDeal</p>
-
 </div>
 
 {#<form action = "file:///C:/Users/Ziqi/Desktop/Results.html">#}
